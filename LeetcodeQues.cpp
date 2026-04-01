@@ -176,5 +176,3 @@ int main() {
     string s = "babad";
     cout << longestPalindrome(s);
 }
-
-// it is only for testing 
