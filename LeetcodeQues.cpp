@@ -145,3 +145,37 @@ int main() {
 }
 
 
+// Insert into a Binary Search Tree
+#include <iostream>
+using namespace std;
+
+// ✅ Added TreeNode definition
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int x) {
+        val = x;
+        left = right = nullptr;
+    }
+};
+
+class Solution {
+public:
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        if (root == nullptr) {
+            return new TreeNode(val);
+        }
+
+        if (val < root->val) {
+            root->left = insertIntoBST(root->left, val);
+        } else {
+            root->right = insertIntoBST(root->right, val);
+        }
+
+        return root;
+    }
+};
+
+
