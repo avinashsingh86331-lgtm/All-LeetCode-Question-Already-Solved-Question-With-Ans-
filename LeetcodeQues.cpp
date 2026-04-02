@@ -179,3 +179,31 @@ public:
 };
 
 
+
+// Increasing Order Search Tree
+class Solution {
+public:
+    TreeNode* increasingBST(TreeNode* root) {
+        TreeNode* dummy = new TreeNode(-1); // temporary node
+        TreeNode* curr = dummy;
+
+        inorder(root, curr);
+
+        return dummy->right; // new root
+    }
+
+    void inorder(TreeNode* node, TreeNode*& curr) {
+        if (node == NULL) return;
+
+        // Step 1: go left
+        inorder(node->left, curr);
+
+        // Step 2: process current node
+        node->left = NULL;          // remove left child
+        curr->right = node;         // attach node to right
+        curr = node;                // move pointer forward
+
+        // Step 3: go right
+        inorder(node->right, curr);
+    }
+};
