@@ -292,7 +292,7 @@ int main() {
 }
 
 
-#Longest Common Prefix
+// Longest Common Prefix
 #include <iostream>
 #include <vector>
 #include <string>
