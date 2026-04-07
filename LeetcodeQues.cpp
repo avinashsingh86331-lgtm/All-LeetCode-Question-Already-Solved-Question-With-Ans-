@@ -290,3 +290,33 @@ int main() {
 
     return 0;
 }
+
+
+#Longest Common Prefix
+#include <iostream>
+#include <vector>
+#include <string>
+
+class Solution {
+public:
+    std::string longestCommonPrefix(std::vector<std::string>& strs) {
+        if (strs.empty()) return "";
+
+        // Start with the first string as the potential prefix
+        std::string prefix = strs[0];
+
+        for (int i = 1; i < strs.size(); i++) {
+            // While the current string strs[i] does not start with the prefix
+            // .find() returns 0 if the prefix is at the very beginning
+            while (strs[i].find(prefix) != 0) {
+                // Shorten the prefix by one character from the end
+                prefix = prefix.substr(0, prefix.length() - 1);
+
+                // If at any point the prefix becomes empty, there is no match
+                if (prefix.empty()) return "";
+            }
+        }
+
+        return prefix;
+    }
+};
