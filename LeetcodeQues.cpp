@@ -359,3 +359,85 @@ public:
         return st.empty();
     }
 };
+
+// Merge Two Sorted Lists
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definition of ListNode
+struct ListNode {
+    int val;
+    struct ListNode* next;
+};
+
+// Function to merge two sorted lists
+struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
+    struct ListNode dummy;
+    dummy.next = NULL;
+
+    struct ListNode* tail = &dummy;
+
+    while (list1 != NULL && list2 != NULL) {
+        if (list1->val <= list2->val) {
+            tail->next = list1;
+            list1 = list1->next;
+        } else {
+            tail->next = list2;
+            list2 = list2->next;
+        }
+        tail = tail->next;
+    }
+
+    // Attach remaining nodes
+    if (list1 != NULL) {
+        tail->next = list1;
+    } else {
+        tail->next = list2;
+    }
+
+    return dummy.next;
+}
+
+// Function to create a new node
+struct ListNode* createNode(int val) {
+    struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+    newNode->val = val;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to print list
+void printList(struct ListNode* head) {
+    struct ListNode* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->val);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    // Creating first list: 1 -> 2 -> 4
+    struct ListNode* list1 = createNode(1);
+    list1->next = createNode(2);
+    list1->next->next = createNode(4);
+
+    // Creating second list: 1 -> 3 -> 4
+    struct ListNode* list2 = createNode(1);
+    list2->next = createNode(3);
+    list2->next->next = createNode(4);
+
+    printf("List 1: ");
+    printList(list1);
+
+    printf("List 2: ");
+    printList(list2);
+
+    // Merge lists
+    struct ListNode* merged = mergeTwoLists(list1, list2);
+
+    printf("Merged List: ");
+    printList(merged);
+
+    return 0;
+}
