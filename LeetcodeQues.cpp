@@ -441,3 +441,49 @@ int main() {
 
     return 0;
 }
+
+//Minimum Distance to the Target Element
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <climits>
+using namespace std;
+
+// Function to find minimum distance
+int getMinDistance(vector<int>& nums, int target, int start) {
+    int minDist = INT_MAX;
+
+    for (int i = 0; i < nums.size(); i++) {
+        if (nums[i] == target) {
+            int dist = abs(i - start);
+            minDist = min(minDist, dist);
+        }
+    }
+
+    return minDist;
+}
+
+int main() {
+    int n;
+    cout << "Enter size of array: ";
+    cin >> n;
+
+    vector<int> nums(n);
+    cout << "Enter elements: ";
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+
+    int target, start;
+    cout << "Enter target: ";
+    cin >> target;
+
+    cout << "Enter start index: ";
+    cin >> start;
+
+    int result = getMinDistance(nums, target, start);
+
+    cout << "Minimum Distance: " << result << endl;
+
+    return 0;
+}
