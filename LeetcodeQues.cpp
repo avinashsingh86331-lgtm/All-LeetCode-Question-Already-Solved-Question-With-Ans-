@@ -585,3 +585,65 @@ int main() {
 
     return 0;
 }
+
+//  Binary Tree Inorder Traversal
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Define TreeNode
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int x) {
+        val = x;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+// Solution class
+class Solution {
+public:
+    void inorder(TreeNode* root, vector<int>& result) {
+        if (root == NULL) return;
+
+        inorder(root->left, result);   // Left
+        result.push_back(root->val);   // Root
+        inorder(root->right, result);  // Right
+    }
+
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        inorder(root, result);
+        return result;
+    }
+};
+
+// Main function
+int main() {
+    /*
+        Example Tree:
+              1
+               \
+                2
+               /
+              3
+    */
+
+    TreeNode* root = new TreeNode(1);
+    root->right = new TreeNode(2);
+    root->right->left = new TreeNode(3);
+
+    Solution obj;
+    vector<int> result = obj.inorderTraversal(root);
+
+    // Print result
+    for (int val : result) {
+        cout << val << " ";
+    }
+
+    return 0;
+}
