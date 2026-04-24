@@ -846,3 +846,49 @@ int main() {
 
     return 0;
 }
+
+// Longest Palindromic Substring
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    string expandFromCenter(string &s, int left, int right) {
+        while (left >= 0 && right < s.size() && s[left] == s[right]) {
+            left--;
+            right++;
+        }
+        return s.substr(left + 1, right - left - 1);
+    }
+
+    string longestPalindrome(string s) {
+        string result = "";
+
+        for (int i = 0; i < s.size(); i++) {
+            // Odd length
+            string odd = expandFromCenter(s, i, i);
+
+            // Even length
+            string even = expandFromCenter(s, i, i + 1);
+
+            if (odd.size() > result.size()) result = odd;
+            if (even.size() > result.size()) result = even;
+        }
+
+        return result;
+    }
+};
+
+int main() {
+    Solution obj;
+    
+    string s;
+    cout << "Enter string: ";
+    cin >> s;
+
+    string ans = obj.longestPalindrome(s);
+    
+    cout << "Longest Palindromic Substring: " << ans << endl;
+
+    return 0;
+}
