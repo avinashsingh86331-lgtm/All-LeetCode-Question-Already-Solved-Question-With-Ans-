@@ -892,3 +892,63 @@ int main() {
 
     return 0;
 }
+
+//Divide Two Integers
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        // Handle overflow case
+        if (dividend == INT_MIN && divisor == -1)
+            return INT_MAX;
+
+        long long a = dividend;
+        long long b = divisor;
+
+        // Determine sign
+        bool negative = (a < 0) ^ (b < 0);
+
+        // Convert to positive safely
+        if (a < 0) a = -a;
+        if (b < 0) b = -b;
+
+        long long result = 0;
+
+        while (a >= b) {
+            long long temp = b;
+            long long multiple = 1;
+
+            while (a >= (temp << 1)) {
+                temp <<= 1;
+                multiple <<= 1;
+            }
+
+            a -= temp;
+            result += multiple;
+        }
+
+        // Apply sign
+        if (negative) result = -result;
+
+        return (int)result;
+    }
+};
+
+int main() {
+    Solution obj;
+
+    int dividend, divisor;
+    cout << "Enter dividend: ";
+    cin >> dividend;
+
+    cout << "Enter divisor: ";
+    cin >> divisor;
+
+    int result = obj.divide(dividend, divisor);
+
+    cout << "Result: " << result << endl;
+
+    return 0;
+}
