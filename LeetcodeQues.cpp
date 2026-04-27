@@ -1003,3 +1003,37 @@ int main() {
 
     return 0;
 }
+
+//Reverse Integer
+#include <iostream>
+#include <climits>
+using namespace std;
+
+int reverseInteger(int x) {
+    long long rev = 0;
+
+    while (x != 0) {
+        int digit = x % 10;
+        rev = rev * 10 + digit;
+        x /= 10;
+
+        // Check overflow
+        if (rev > INT_MAX || rev < INT_MIN)
+            return 0;
+    }
+
+    return (int)rev;
+}
+
+int main() {
+    int x;
+
+    cout << "Enter an integer: ";
+    cin >> x;
+
+    int result = reverseInteger(x);
+
+    cout << "Reversed Integer: " << result << endl;
+
+    return 0;
+}
