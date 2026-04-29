@@ -1037,3 +1037,88 @@ int main() {
 
     return 0;
 }
+
+//Rotate List
+#include <iostream>
+using namespace std;
+
+// Definition for singly-linked list
+struct ListNode {
+    int val;
+    ListNode* next;
+    
+    ListNode(int x) {
+        val = x;
+        next = NULL;
+    }
+};
+
+// Function to rotate list
+ListNode* rotateRight(ListNode* head, int k) {
+    if (!head || !head->next || k == 0)
+        return head;
+
+    // Find length of list
+    int len = 1;
+    ListNode* tail = head;
+
+    while (tail->next) {
+        tail = tail->next;
+        len++;
+    }
+
+    // Make circular list
+    tail->next = head;
+
+    // Reduce k
+    k = k % len;
+
+    // Find new tail
+    int stepsToNewTail = len - k - 1;
+    ListNode* newTail = head;
+
+    for (int i = 0; i < stepsToNewTail; i++) {
+        newTail = newTail->next;
+    }
+
+    // New head
+    ListNode* newHead = newTail->next;
+
+    // Break circle
+    newTail->next = NULL;
+
+    return newHead;
+}
+
+// Print linked list
+void printList(ListNode* head) {
+    while (head) {
+        cout << head->val;
+        if (head->next)
+            cout << " -> ";
+        head = head->next;
+    }
+    cout << endl;
+}
+
+// Main function
+int main() {
+    // Create linked list: 1 -> 2 -> 3 -> 4 -> 5
+    ListNode* head = new ListNode(1);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(3);
+    head->next->next->next = new ListNode(4);
+    head->next->next->next->next = new ListNode(5);
+
+    int k = 2;
+
+    cout << "Original List: ";
+    printList(head);
+
+    head = rotateRight(head, k);
+
+    cout << "Rotated List: ";
+    printList(head);
+
+    return 0;
+}
