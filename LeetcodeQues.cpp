@@ -1141,3 +1141,59 @@ public:
         return maxProfit;
     }
 };
+
+//Same Tree
+#include <iostream>
+using namespace std;
+
+// Definition for tree node
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int x) {
+        val = x;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+// Function to check if two trees are same
+bool isSameTree(TreeNode* p, TreeNode* q) {
+    // If both are NULL
+    if (p == NULL && q == NULL)
+        return true;
+
+    // If one is NULL and other is not
+    if (p == NULL || q == NULL)
+        return false;
+
+    // If values are different
+    if (p->val != q->val)
+        return false;
+
+    // Check left and right subtree
+    return isSameTree(p->left, q->left) &&
+           isSameTree(p->right, q->right);
+}
+
+int main() {
+    // Creating first tree
+    TreeNode* root1 = new TreeNode(1);
+    root1->left = new TreeNode(2);
+    root1->right = new TreeNode(3);
+
+    // Creating second tree
+    TreeNode* root2 = new TreeNode(1);
+    root2->left = new TreeNode(2);
+    root2->right = new TreeNode(3);
+
+    // Check if trees are same
+    if (isSameTree(root1, root2))
+        cout << "Trees are Same" << endl;
+    else
+        cout << "Trees are Not Same" << endl;
+
+    return 0;
+}
