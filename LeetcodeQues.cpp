@@ -1197,3 +1197,36 @@ int main() {
 
     return 0;
 }
+
+//Gray Code
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to generate Gray Code
+vector<int> grayCode(int n) {
+    vector<int> result;
+    int size = 1 << n;   // 2^n
+
+    for (int i = 0; i < size; i++) {
+        result.push_back(i ^ (i >> 1));
+    }
+
+    return result;
+}
+
+int main() {
+    int n;
+
+    cout << "Enter number of bits: ";
+    cin >> n;
+
+    vector<int> ans = grayCode(n);
+
+    cout << "Gray Code sequence: ";
+    for (int num : ans) {
+        cout << num << " ";
+    }
+
+    return 0;
+}
