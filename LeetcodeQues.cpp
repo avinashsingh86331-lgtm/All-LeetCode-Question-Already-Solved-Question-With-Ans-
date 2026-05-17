@@ -1340,3 +1340,58 @@ int main() {
 
     return 0;
 }
+
+//Valid Number
+class Solution {
+public:
+    bool isNumber(string s) {
+        int n = s.size();
+        bool num = false;
+        bool dot = false;
+        bool exp = false;
+
+        // Remove leading and trailing spaces
+        int start = 0, end = n - 1;
+
+        while (start < n && s[start] == ' ')
+            start++;
+
+        while (end >= 0 && s[end] == ' ')
+            end--;
+
+        if (start > end)
+            return false;
+
+        for (int i = start; i <= end; i++) {
+            char ch = s[i];
+
+            if (isdigit(ch)) {
+                num = true;
+            }
+            else if (ch == '+' || ch == '-') {
+                // Sign allowed only at beginning or after e/E
+                if (i != start && s[i - 1] != 'e' && s[i - 1] != 'E')
+                    return false;
+            }
+            else if (ch == '.') {
+                // Dot not allowed after exponent or twice
+                if (dot || exp)
+                    return false;
+                dot = true;
+            }
+            else if (ch == 'e' || ch == 'E') {
+                // Exponent must appear once and after a number
+                if (exp || !num)
+                    return false;
+
+                exp = true;
+                num = false; // Need number after exponent
+            }
+            else {
+                return false;
+            }
+        }
+
+        return num;
+    }
+};
